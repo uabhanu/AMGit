@@ -10,6 +10,16 @@ public class BhanuNetworkManager : NetworkManager
        StartHost();
     }
 
+    public override void OnClientConnect(NetworkConnection bhanuClientConnected)
+    {
+        Debug.Log("Client Connected with Address : " + bhanuClientConnected.address);
+    }
+
+    public override void OnStartClient(NetworkClient bhanuClient)
+    {
+        Debug.Log("Client Started");
+    }
+
     public override void OnStartHost()
     {
         Debug.Log("Host Started");
