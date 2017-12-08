@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class BhanuPlayer : MonoBehaviour 
+public class BhanuPlayer : NetworkBehaviour
 {
     Vector3 m_inputValue;
 
@@ -17,10 +18,13 @@ public class BhanuPlayer : MonoBehaviour
 		if(Time.timeScale == 0)
             return;
 
-            m_inputValue.x = Input.GetAxis("Horizontal");
+        if(isLocalPlayer)
+        {
+            m_inputValue.x = CrossPlatformInputManager.GetAxis("Horizontal");
             m_inputValue.y = 0f;
-            m_inputValue.z = Input.GetAxis("Vertical");
+            m_inputValue.z = CrossPlatformInputManager.GetAxis("Vertical");
 
             transform.Translate(m_inputValue);
+        }
 	}
 }
