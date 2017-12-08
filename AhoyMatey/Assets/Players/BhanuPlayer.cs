@@ -6,13 +6,10 @@ using UnityEngine.Networking;
 
 public class BhanuPlayer : NetworkBehaviour
 {
+    AudioListener m_bhanuListener;
+    Camera m_bhanuCamera;
     Vector3 m_inputValue;
-
-	void Start() 
-    {
-		
-	}
-
+       
 	void Update() 
     {
 		if(Time.timeScale == 0)
@@ -27,4 +24,13 @@ public class BhanuPlayer : NetworkBehaviour
             transform.Translate(m_inputValue);
         }
 	}
+
+    public override void OnStartLocalPlayer()
+    {
+        m_bhanuListener = GetComponentInChildren<AudioListener>();
+        m_bhanuCamera = GetComponentInChildren<Camera>();
+
+        m_bhanuListener.enabled = true;
+        m_bhanuCamera.enabled = true;
+    }
 }
