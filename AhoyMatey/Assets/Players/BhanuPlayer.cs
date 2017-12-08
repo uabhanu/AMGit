@@ -17,9 +17,9 @@ public class BhanuPlayer : MonoBehaviour
 		if(Time.timeScale == 0)
             return;
 
-            m_inputValue.x = CrossPlatformInputManager.GetAxis("Horizontal");
+            m_inputValue.x = Input.GetAxis("Horizontal");
             m_inputValue.y = 0f;
-            m_inputValue.z = CrossPlatformInputManager.GetAxis("Vertical");
+            m_inputValue.z = Input.GetAxis("Vertical");
 
             transform.Translate(m_inputValue);
 	}
