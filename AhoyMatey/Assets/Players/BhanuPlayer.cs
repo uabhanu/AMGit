@@ -8,20 +8,36 @@ public class BhanuPlayer : NetworkBehaviour
 {
     AudioListener m_bhanuListener;
     Camera m_bhanuCamera;
+    Rigidbody m_bhanuShipBody;
     Vector3 m_inputValue;
+
+    [SerializeField] float  m_speed;
+
+    void Start()
+    {
+        m_bhanuShipBody = GetComponent<Rigidbody>();
+    }
        
-	void Update() 
+	void FixedUpdate() 
     {
 		if(Time.timeScale == 0)
             return;
 
         if(isLocalPlayer)
         {
-            m_inputValue.x = CrossPlatformInputManager.GetAxis("Horizontal");
-            m_inputValue.y = 0f;
-            m_inputValue.z = CrossPlatformInputManager.GetAxis("Vertical");
+            if(CrossPlatformInputManager.GetButton("FWD"))
+            {
+                transform.Translate(Vector3.forward);
+            }
 
-            transform.Translate(m_inputValue);
+            if(CrossPlatformInputManager.GetButton("BWD"))
+            {
+                transform.Translate(-Vector3.forward);
+            }
+
+            float mouseInput = CrossPlatformInputManager.GetAxis("Mouse X");
+            Vector3 rotationWithMouse = new Vector3(0f , mouseInput , 0f);
+            transform.Rotate(rotationWithMouse);
         }
 	}
 
